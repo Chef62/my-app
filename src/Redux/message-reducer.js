@@ -8,6 +8,7 @@ let initialState = {
     { id: 3, name: "1111" },
     { id: 4, name: "1111" },
     { id: 5, name: "1111" },
+    { id: 6, name: "33333" },
   ],
   messages: [
     { id: 1, message: "Hi" },
