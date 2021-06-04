@@ -7,7 +7,7 @@ import {
 import Dialogs from "./Dialogs";
 
 let mapStateToProps = (state) => {
-  return { messageReducer: state.dialogs };
+  return { messageReducer: state.messageReducer };
 };
 
 let mapDispatchToProps = (dispatch) => {
