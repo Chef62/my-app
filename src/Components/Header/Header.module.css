@@ -1,8 +1,16 @@
 .header {
-    grid-area: header;
-    background-color: darkslateblue;
-    padding: 20px;
+  grid-area: header;
+  background-color: darkslateblue;
+  padding: 20px;
 }
 .header img {
-    width: 140px;
+  width: 140px;
+}
+
+.liginBlock {
+  float: right;
+}
+
+.liginBlock a {
+  color: chartreuse;
 }
