@@ -2,20 +2,18 @@ import React from "react";
 import { connect } from "react-redux";
 import {
   follow,
-  setUsers,
   unfollow,
   setCurrentPage,
-  setTotalUsersCount,
-  toggleIsFetching,
+  toggleFollowingProgress,
+  getUsers,
 } from "../../Redux/users-reducer";
-import * as axios from "axios";
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
-import { usersAPIInfo } from "../../api/api";
 
 class UsersContainer extends React.Component {
   componentDidMount() {
-    this.props.toggleIsFetching(true);
+    this.props.getUsers(this.props.currentPage, this.props.pageSize);
+    /* this.props.toggleIsFetching(true);
 
     usersAPIInfo
       .getUsers(this.props.currentPage, this.props.pageSize)
@@ -23,17 +21,19 @@ class UsersContainer extends React.Component {
         this.props.toggleIsFetching(false);
         this.props.setUsers(data.items);
         this.props.setTotalUsersCount(data.totalCount);
-      });
+      });*/
   }
 
   onPageChanged = (pageNumber) => {
-    this.props.setCurrentPage(pageNumber);
+    this.props.getUsers(pageNumber, this.props.pageSize);
+
+    /*this.props.setCurrentPage(pageNumber);
     this.props.toggleIsFetching(true);
 
     usersAPIInfo.getUsers(pageNumber, this.props.pageSize).then((data) => {
       this.props.toggleIsFetching(false);
       this.props.setUsers(data.items);
-    });
+    });*/
   };
 
   render() {
@@ -48,6 +48,7 @@ class UsersContainer extends React.Component {
           users={this.props.users}
           follow={this.props.follow}
           unfollow={this.props.unfollow}
+          followingInProgress={this.props.followingInProgress}
         />
       </>
     );
@@ -61,6 +62,7 @@ let mapStateToProps = (state) => {
     totalUsersCount: state.usersPage.totalUsersCount,
     currentPage: state.usersPage.currentPage,
     isFetching: state.usersPage.isFetching,
+    followingInProgress: state.usersPage.followingInProgress,
   };
 };
 
@@ -90,8 +92,7 @@ let mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
   follow,
   unfollow,
-  setUsers,
   setCurrentPage,
-  setTotalUsersCount,
-  toggleIsFetching,
+  toggleFollowingProgress,
+  getUsers,
 })(UsersContainer);
